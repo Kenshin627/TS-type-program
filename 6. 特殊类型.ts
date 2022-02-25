@@ -27,3 +27,6 @@ type removeIndexSignature<T extends Record<string, any>> = { [ key in keyof T  a
 
 //9. classPublicProps
 type classPublicProps<T extends Record<string, any>> = { [ key in keyof T ]: T[key] };
+
+//10. DeepKeyOf
+type DeepKeyOf<T> = T extends Record<string, any> ? { [ key in keyof T ]: key extends string ? key | `${key}${DeepKeyOf<T[key]>}` : never }[keyof T] : never;
